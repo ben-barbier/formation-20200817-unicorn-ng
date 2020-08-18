@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { UnicornListComponent } from './pages/unicorn-list/unicorn-list.component';
+import { UnicornComponent } from './pages/unicorn/unicorn.component';
+import { AgeGuard } from './pages/unicorn/age.guard';
 
-const routes: Routes = [];
+const routes: Routes = [
+    { path: '', component: UnicornListComponent },
+    { path: 'unicorn/:id', component: UnicornComponent, canActivate: [AgeGuard] },
+    { path: '**', redirectTo: '' }
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
