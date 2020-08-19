@@ -15,6 +15,11 @@
                routerLinkActive="active"
                [routerLink]="['/unicorn']"
             > Unicorn </a>
+            <a mat-list-item
+               [routerLinkActiveOptions]="{exact:true}"
+               routerLinkActive="active"
+               [routerLink]="['/exercices']"
+            > Exercices </a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

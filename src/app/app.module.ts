@@ -16,6 +16,8 @@ import { MatListModule } from '@angular/material/list';
 import { UnicornComponent } from './pages/unicorn/unicorn.component';
 import { UnicornListComponent } from './pages/unicorn-list/unicorn-list.component';
 import { UnicornCardComponent } from './pages/unicorn-list/unicorn-card/unicorn-card.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ExercicesComponent } from './pages/exercices/exercices.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +27,8 @@ import { UnicornCardComponent } from './pages/unicorn-list/unicorn-card/unicorn-
         MagicalNamePipe,
         AgePipe,
         NavComponent,
-        UnicornComponent
+        UnicornComponent,
+        ExercicesComponent
     ],
     imports: [
         BrowserModule,
@@ -38,6 +41,7 @@ import { UnicornCardComponent } from './pages/unicorn-list/unicorn-card/unicorn-
         MatToolbarModule,
         MatSidenavModule,
         MatListModule,
+        MatSnackBarModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
