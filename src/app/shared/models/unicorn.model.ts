@@ -6,5 +6,6 @@ export interface Unicorn {
     photo: string;
     hobbies: string[];
     capacities: number[];
-    age: number;
+    age?: number;
+    capacitiesLabels?: string[];
 }

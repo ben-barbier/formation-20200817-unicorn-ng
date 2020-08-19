@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { from, Observable, throwError } from 'rxjs';
 import { Unicorn } from '../models/unicorn.model';
 import { environment } from '../../../environments/environment';
-import { concatAll, filter, map, pluck, reduce, toArray } from 'rxjs/operators';
+import { catchError, concatAll, filter, map, mergeMap, pluck, reduce, toArray } from 'rxjs/operators';
+import { CapacitiesService } from './capacities.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class UnicornsService {
 
-    constructor(private http: HttpClient) {}
+    constructor(
+        private http: HttpClient,
+        private capacitiesService: CapacitiesService,
+    ) {}
 
     public getAll(): Observable<Unicorn[]> {
         return this.http.get<Unicorn[]>(`${environment.apiUrl}/unicorns`).pipe(
@@ -52,11 +56,31 @@ export class UnicornsService {
         );
     }
 
-    // EX02 : Liste des licornes avec N-Kg de +
     public licornesWithKg(kg: number): Observable<Unicorn[]> {
         return this.getAll().pipe(
             concatAll(),
             map(unicorn => ({ ...unicorn, weight: unicorn.weight + kg })),
+            toArray(),
+        );
+    }
+
+    public getAllWithCapacitiesLabels(): Observable<Unicorn[]> {
+        return this.getAll().pipe(
+            // N licornes
+            concatAll(),
+            // 1 licorne
+            mergeMap((unicorn: Unicorn) =>
+                from(unicorn.capacities).pipe(
+                    // 1 capacity ID
+                    mergeMap(capacityId => this.capacitiesService.get(capacityId)),
+                    // 1 capacity
+                    pluck('label'),
+                    // 1 label de capacity
+                    toArray(),
+                    // N labels de capacities
+                    map((labels: string[]): Unicorn => ({ ...unicorn, capacitiesLabels: labels }))
+                )
+            ),
             toArray(),
         );
     }

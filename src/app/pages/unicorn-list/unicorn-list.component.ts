@@ -14,7 +14,7 @@ export class UnicornListComponent implements OnInit {
     constructor(private unicornsService: UnicornsService) { }
 
     ngOnInit(): void {
-        this.unicornsService.getAll().subscribe(unicorns => this.unicorns = unicorns);
+        this.unicornsService.getAllWithCapacitiesLabels().subscribe(unicorns => this.unicorns = unicorns);
     }
 
     removeUnicornFromList(unicorn: Unicorn): void {

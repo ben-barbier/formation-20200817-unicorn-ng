@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Unicorn } from '../../../shared/models/unicorn.model';
+import { CartService } from '../../../shared/services/cart.service';
 
 @Component({
     selector: 'app-unicorn-card',
@@ -18,6 +19,10 @@ export class UnicornCardComponent implements OnInit {
 
     public isJunior: boolean;
 
+    public isInCart = false;
+
+    constructor(private cartService: CartService) {}
+
     public logName(): void {
         console.log(this.unicorn.name);
     }
@@ -28,5 +33,14 @@ export class UnicornCardComponent implements OnInit {
 
     ngOnInit(): void {
         this.isJunior = this.currentYear - this.unicorn.birthyear < 16;
+    }
+
+    public toggleToCart(): void {
+        if (this.isInCart) {
+            this.cartService.removeFromCart(this.unicorn);
+        } else {
+            this.cartService.addToCart(this.unicorn);
+        }
+        this.isInCart = !this.isInCart;
     }
 }

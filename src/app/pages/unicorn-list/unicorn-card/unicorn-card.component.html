@@ -3,7 +3,7 @@
 <p [ngClass]="{junior: isJunior}">Age: {{ unicorn.birthyear | age }}</p>
 <p>weight: {{ unicorn.weight }}</p>
 <p>hobbies: {{ unicorn.hobbies }}</p>
-<p>capacities: {{ unicorn.capacities }}</p>
+<p>capacities: {{ unicorn.capacitiesLabels }}</p>
 <p><img [src]="unicorn.photo"></p>
 
 <button mat-fab color="warn" (click)="removeUnicorn()">
@@ -12,4 +12,8 @@
 
 <button mat-fab color="primary" [routerLink]="['/unicorn', unicorn.id]">
     <mat-icon>visibility</mat-icon>
+</button>
+
+<button mat-fab [color]="isInCart?'accent':null" (click)="toggleToCart()">
+    <mat-icon>favorite</mat-icon>
 </button>
