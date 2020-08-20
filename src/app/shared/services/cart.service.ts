@@ -17,4 +17,8 @@ export class CartService {
         this.cart.next(this.cart.getValue().filter(u => u.id !== unicorn.id));
     }
 
+    public isInCart(unicorn: Unicorn): boolean {
+        return this.cart.getValue().some(u => u.id === unicorn.id);
+    }
+
 }

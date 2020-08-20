@@ -81,7 +81,9 @@ export class UnicornsService {
                     map((labels: string[]): Unicorn => ({ ...unicorn, capacitiesLabels: labels }))
                 )
             ),
+
             toArray(),
+            map(unicorns => unicorns.sort((u1, u2) => u1.id - u2.id)),
         );
     }
 

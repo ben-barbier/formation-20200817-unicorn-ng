@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Unicorn } from '../../../shared/models/unicorn.model';
 import { CartService } from '../../../shared/services/cart.service';
 
@@ -9,19 +9,17 @@ import { CartService } from '../../../shared/services/cart.service';
 })
 export class UnicornCardComponent implements OnInit {
 
-    @Input()
-    public unicorn: Unicorn;
-
-    @Output()
-    public removed = new EventEmitter<Unicorn>();
+    @Input() public unicorn: Unicorn;
+    @Output() public removed = new EventEmitter<Unicorn>();
 
     public currentYear = new Date().getFullYear();
-
     public isJunior: boolean;
+    public isInCart: boolean;
 
-    public isInCart = false;
 
-    constructor(private cartService: CartService) {}
+    constructor(private cartService: CartService) {
+        // ICI, on N'a PAS accès aux valeurs des @Input
+    }
 
     public logName(): void {
         console.log(this.unicorn.name);
@@ -31,8 +29,10 @@ export class UnicornCardComponent implements OnInit {
         this.removed.emit(this.unicorn);
     }
 
+    // ICI, on a accès aux valeurs des @Input
     ngOnInit(): void {
         this.isJunior = this.currentYear - this.unicorn.birthyear < 16;
+        this.isInCart = this.cartService.isInCart(this.unicorn);
     }
 
     public toggleToCart(): void {
@@ -42,5 +42,10 @@ export class UnicornCardComponent implements OnInit {
             this.cartService.addToCart(this.unicorn);
         }
         this.isInCart = !this.isInCart;
+    }
+
+    public addOne(id: number): number {
+        console.count('addOne');
+        return id + 1;
     }
 }

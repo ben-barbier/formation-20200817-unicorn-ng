@@ -1,4 +1,4 @@
-<p>ID: {{ unicorn.id }}</p>
+<p>ID: {{ unicorn.id }} {{ addOne(unicorn.id) }}</p>
 <p (click)="logName()">Name: {{ unicorn.name | magicalName }}</p>
 <p [ngClass]="{junior: isJunior}">Age: {{ unicorn.birthyear | age }}</p>
 <p>weight: {{ unicorn.weight }}</p>

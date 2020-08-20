@@ -7,13 +7,11 @@ import { UnicornsService } from '../../shared/services/unicorns.service';
     templateUrl: './unicorn-list.component.html',
     styleUrls: ['./unicorn-list.component.scss']
 })
-export class UnicornListComponent implements OnInit {
+export class UnicornListComponent {
 
     public unicorns: Unicorn[] = [];
 
-    constructor(private unicornsService: UnicornsService) { }
-
-    ngOnInit(): void {
+    constructor(private unicornsService: UnicornsService) {
         this.unicornsService.getAllWithCapacitiesLabels().subscribe(unicorns => this.unicorns = unicorns);
     }
 
