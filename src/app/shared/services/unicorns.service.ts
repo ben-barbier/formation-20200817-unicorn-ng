@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable, throwError } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { Unicorn } from '../models/unicorn.model';
 import { environment } from '../../../environments/environment';
-import { catchError, concatAll, filter, map, mergeMap, pluck, reduce, toArray } from 'rxjs/operators';
+import { concatAll, filter, map, mergeMap, pluck, reduce, toArray } from 'rxjs/operators';
 import { CapacitiesService } from './capacities.service';
 
 @Injectable({

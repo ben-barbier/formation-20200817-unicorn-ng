@@ -24,10 +24,8 @@ export class AgeGuard implements CanActivate {
         // Ne laisser passer que sui la licorne a plus de 4 ans.
         const unicorn$: Observable<Unicorn> = this.unicornsService.get(next.params.id);
 
-        debugger;
         return unicorn$.pipe(
             map(unicorn => {
-                debugger;
                 if (unicorn.birthyear < new Date().getFullYear() - 4) {
                     return true;
                 } else {

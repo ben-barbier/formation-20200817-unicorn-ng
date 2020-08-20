@@ -20,6 +20,11 @@
                routerLinkActive="active"
                [routerLink]="['/exercices']"
             > Exercices </a>
+
+            <a mat-list-item>
+                <span (click)="changeLocale('fr')">FR</span> / <span (click)="changeLocale('en')">EN</span>
+            </a>
+
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

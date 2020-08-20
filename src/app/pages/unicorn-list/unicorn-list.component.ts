@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Unicorn } from '../../shared/models/unicorn.model';
 import { UnicornsService } from '../../shared/services/unicorns.service';
 

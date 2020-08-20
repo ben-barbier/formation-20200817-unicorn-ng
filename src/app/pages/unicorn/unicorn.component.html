@@ -1,1 +1,21 @@
+<h1>{{ (unicorn$ | async)?.name }}</h1>
+
 <pre>{{ unicorn | json }}</pre>
+
+<hr>
+
+
+<form #unicornForm="ngForm" (ngSubmit)="updateUnicorn(unicornForm.value)">
+
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput type="text" name="name" [ngModel]="unicorn?.name" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Birthyear</mat-label>
+        <input matInput type="number" name="birthyear" min="1800" [ngModel]="unicorn?.birthyear" required>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="unicornForm.invalid">Enregistrer</button>
+</form>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { CartService } from '../../services/cart.service';
 import { Unicorn } from '../../models/unicorn.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-nav',
@@ -23,8 +24,12 @@ export class NavComponent {
     constructor(
         private breakpointObserver: BreakpointObserver,
         private cartService: CartService,
+        private translateService: TranslateService
     ) {
         this.cartService.cart.subscribe(cart => this.cart = cart);
     }
 
+    public changeLocale(lang: 'fr' | 'en'): void {
+        this.translateService.use(lang);
+    }
 }
